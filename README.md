@@ -56,7 +56,7 @@ The value corresponding to this key is a dict containing three optional keys:
 ### Filtering
 
 A possible action is the **set_variable** action, which defines a variable that can be used somewhere else in the config.  
-From then on, instead of setting a value, you can set "?varname", which will be replaced by the value 0.1234. You can change a variable by re-setting it.
+From then on, instead of setting a value, you can set "?varname", which will be replaced by the value specified. You can change a variable by re-setting it.
 Additionally, you can take a value of the midi data, starting from index 0. For example, "?2" will take the 3rd value of the midi data.  
 Finally, you can use the midi_timestamp with "?timestamp"  
 
