@@ -1,6 +1,8 @@
 # mymidipad  
 
-Some python that allows easy config and use of midi pads with multiple functionalities.
+Some python that allows easy config and use of midi pads with multiple functionalities.  
+THIS IS NOT WORKING YET. IT IS STILL IN DEVELOPMENT. WILL HAVE A FIRST WORKING VERSION IN A FEW DAYS
+
 ---
 ## Dependencies  
 
