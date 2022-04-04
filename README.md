@@ -33,7 +33,7 @@ If you aren't sure how your pad works, just run a config file without any action
 ### Actions
 
 Each action has a standard model:
-```json
+```
 {
   "action":"action_name",
   "args":(arg1, arg2),
@@ -67,7 +67,7 @@ Finally, you can use the midi_timestamp with "?timestamp"
 ### "test"
 
 Will just print the given args and kwargs out
-```json
+```
 {
   "action":"test",
   "args:(),
@@ -78,7 +78,7 @@ Will just print the given args and kwargs out
 ### "set_variable"
 
 Will add a variable
-```json
+```
 {
   "action":"set_variable",
   "args":(),
@@ -92,7 +92,7 @@ Will add a variable
 ### "hotkeys_click"
 
 Will do a mouseclick
-```json
+```
 {
   "action":"hotkeys_click",
   "args":(),
@@ -109,7 +109,7 @@ Will do a mouseclick
 ### "hotkeys_hotkeys"
 
 Presses keyboard keys
-```json
+```
 {
   "action":"hotkeys_hotkeys",
   "args":(("a","b"),),# only one arg, which is a tuple containing the keys to press
