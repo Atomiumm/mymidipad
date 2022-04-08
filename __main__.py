@@ -1,13 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os
+os.system("cls")
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 from config import *
 if "obs" in modules_to_import:
 	from lib.obs import obsws
 from functionmap import functions
 from lib.utils import VARIABLES
 import pygame.midi as midi
-import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+from time import sleep
 
 def connect_midi_pad(midi_input = default_midi_input):
 	midi.init()
@@ -27,14 +29,17 @@ def connect_midi_pad(midi_input = default_midi_input):
 def filter(midi_data, timestamp, obj):
 	if type(obj) == str:
 		if obj.startswith("?"):
-			if obj == "?timestamp":
-				return timestamp
-			else:
-				try:
+			try:
+				if obj == "?timestamp":
+					return timestamp
+				if obj[1:].isdigit():
 					return midi_data[int(obj[1:])]
-				except:
-					if obj[1:] in VARIABLES:
-						return VARIABLES[obj[1:]]
+				if obj.startswith("?obs"):
+					return obsws[int(obj[4:])-1]
+				if obj[1:] in VARIABLES:
+					return VARIABLES[obj[1:]]
+			except:
+				pass
 		return obj
 	elif type(obj) == dict:
 		newobj = {}
@@ -59,6 +64,9 @@ def midi_pad_poll(midi_pad):
 	while True:
 		while midi_pad.poll():
 			midi_data, timestamp = tuple(midi_pad.read(1)[0])
+			sleep(0.1)
+			while midi_pad.poll():
+				midi_data, timestamp = tuple(midi_pad.read(1)[0])
 			print(midi_data, timestamp)
 			for i in range(len(midi_data)):
 				if tuple(midi_data[:i]) in Actions_on_event:
@@ -66,14 +74,14 @@ def midi_pad_poll(midi_pad):
 					if "ActionsGeneral" in to_execute:
 						for action in to_execute["ActionsGeneral"]:
 							execute_action(action)
-					if "ActionOnValue" in to_execute:
-						for valuecheck in to_execute:
+					if "ActionsOnValue" in to_execute:
+						for valuecheck in to_execute["ActionsOnValue"]:
 							if valuecheck["value"][0] == valuecheck["value"][1]:
 								for action in valuecheck["actions"]:
 									execute_action(action)
-					if "ActionIfInRange" in to_execute:
-						for valuecheck in to_execute:
-							if valuecheck["value"][0] >= valuecheck["value"][1] and valuecheck["value"][0] < valuecheck["value"][1]:
+					if "ActionsIfInRange" in to_execute:
+						for valuecheck in to_execute["ActionsIfInRange"]:
+							if valuecheck["value"][0] >= valuecheck["value"][1] and valuecheck["value"][0] < valuecheck["value"][2]:
 								for action in valuecheck["actions"]:
 									execute_action(action)
 
@@ -82,8 +90,7 @@ def midi_pad_poll(midi_pad):
 
 
 if __name__ == "__main__":
-	os.system("cls")
-	#midi_pad = connect_midi_pad()
+	midi_pad = connect_midi_pad()
 	for action in Actions_on_start:
 		execute_action(filter([], 0, action))
-	#midi_pad_poll(midi_pad)
+	midi_pad_poll(midi_pad)

@@ -2,40 +2,30 @@ default_midi_input = 1
 
 modules_to_import = ["obs"]
 
-OBSserver_url = "ws://127.0.0.1:4444"
-OBSserver_password = "password"
+OBSserver_urls = ["ws://127.0.0.1:4455"]
+OBSserver_passwords = ["password"]
 
 Actions_on_start = [
 	{
-		"action":"set_variable",
-		"args":(),
+		"action":"obs_set_profile",
+		"args":("?obs1",),
 		"kwargs":{
-			"name":"test",
-			"val":0.1234
+			"profileName":"Untitled"
 		}
 	},
 	{
-		"action":"hotkeys_hotkeys",
-		"args":(("a","b"),),
-		"kwargs":{"interval":"?test"}
-	},
-	{
-		"action":"hotkeys_click",
-		"args":(),
+		"action":"obs_set_scene_collection",
+		"args":("?obs1",),
 		"kwargs":{
-			"x":1000,
-			"y":1000,
-			"clicks":1,
-			"button":"right",
-			"interval":"?test"
+			"sceneCollectionName":"Untitled"
 		}
 	}
 ]
 
 Actions_on_event = {
-	(144,0) : {
+	(999,999) : {
 		"ActionsGeneral":[],
-		"ActionOnValue":[
+		"ActionsOnValue":[
 			{
 				"value":("?2",127),
 				"actions":[]
@@ -45,6 +35,94 @@ Actions_on_event = {
 			{
 				"value":("?2",20,50),
 				"actions":[]
+			}
+		]
+	},
+	tuple() : {"ActionsGeneral":[{"action":"test","args":tuple(),"kwargs":{}}]},
+	(154,8) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_set_scene_preview",
+				"args":("?obs1",),
+				"kwargs":{"sceneName":"Scene Display 1"}
+			}
+		]
+	},
+	(154,9) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_set_scene_preview",
+				"args":("?obs1",),
+				"kwargs":{"sceneName":"Scene Display 2"}
+			}
+		]
+	},
+	(154,10) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_set_scene_preview",
+				"args":("?obs1",),
+				"kwargs":{"sceneName":"Scene Display 3"}
+			}
+		]
+	},
+	(154,16) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_studio_mode_transition",
+				"args":("?obs1",),
+				"kwargs":{}
+			}
+		]
+	},
+	(154,22) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_toggle_stream",
+				"args":("?obs1",),
+				"kwargs":{}
+			}
+		]
+	},
+	(154,23) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_toggle_record",
+				"args":("?obs1",),
+				"kwargs":{}
+			}
+		]
+	},
+	(186,9) : {
+		"ActionsGeneral":[
+			{
+				"action":"obs_set_transition_duration",
+				"args":("?obs1",),
+				"kwargs":{"transitionDuration":"?2"}
+			}
+		],
+		"ActionsOnValue":[
+			{
+				"value":("?2",0),
+				"actions":[
+					{
+						"action":"obs_set_transition",
+						"args":("?obs1",),
+						"kwargs":{"transitionName":"Cut"}
+					}
+				]
+			}
+		],
+		"ActionsIfInRange":[
+			{
+				"value":("?2",1,128),
+				"actions":[
+					{
+						"action":"obs_set_transition",
+						"args":("?obs1",),
+						"kwargs":{"transitionName":"Fade"}
+					}
+				]
 			}
 		]
 	}

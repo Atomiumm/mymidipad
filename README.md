@@ -6,7 +6,7 @@ Some python that allows easy config and use of midi pads with multiple functiona
 
 Depend on the modules you might like to run.  
 In any case:  
-> pip install pygame, pyautogui  
+> pip install pygame, pyautogui, requests
 
 If you want to use the obs module:  
 > pip install simpleobsws  
@@ -14,7 +14,7 @@ If you want to use the obs module:
 ## How to run
 
 Just download the project and execute the __main__.py file like this:  
-> $ cd <path to where the project was put>  
+> $ cd *path to where the project was put*
 > $ python mymidipad  
 
 ---
@@ -27,8 +27,8 @@ If you aren't sure how your pad works, just run a config file without any action
 * **Actions_on_event** contains all actions that can be executed when using the pad.  
 * **modules_to_import** contains strings for each module you might want to import and run.  
     * **"obs"** will allow you to use an obs websocket  
-        * **OBSserver_url** url to the obs websocket. For example: "ws://127.0.0.1:4444"  
-        * **OBSserver_password** password to the obs websocket.  
+        * **OBSserver_urls** urls to the obs websockets. For example: ["ws://127.0.0.1:4455", "ws://127.0.0.1:4456"]
+        * **OBSserver_password** passwords to the obs websockets.  
 
 ### Actions
 
@@ -64,59 +64,5 @@ Finally, you can use the midi_timestamp with "?timestamp"
 
 ## Actions
 
-### "test"
-
-Will just print the given args and kwargs out
-```
-{
-  "action":"test",
-  "args:(),
-  "kwargs:{}
-}
-```
-
-### "set_variable"
-
-Will add a variable
-```
-{
-  "action":"set_variable",
-  "args":(),
-  "kwargs":{
-    "name":"varname",
-    "val":0.1234
-  }
-}
-```
-
-### "hotkeys_click"
-
-Will do a mouseclick
-```
-{
-  "action":"hotkeys_click",
-  "args":(),
-  "kwargs":{
-    "x":1000,#optional but needs y if present
-    "y":1000,#optional but needs x if present
-    "clicks":1,#optional
-    "button":"left",#optional
-    "interval":"0.1"#optional
-  }
-}
-```
-
-### "hotkeys_hotkeys"
-
-Presses keyboard keys
-```
-{
-  "action":"hotkeys_hotkeys",
-  "args":(("a","b"),),# only one arg, which is a tuple containing the keys to press
-  "kwargs":{
-    "interval":0.1#optional
-  }
-}
-```
-  
+[link to list of actions](actions.md)
   
