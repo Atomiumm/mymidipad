@@ -1,4 +1,6 @@
 import lib
+#implement better conditions in config
+#implement better filter with math parsing
 #add requests
 #add obs mediainputs
 #add spotify

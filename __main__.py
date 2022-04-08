@@ -33,7 +33,7 @@ def filter(midi_data, timestamp, obj):
 				if obj == "?timestamp":
 					return timestamp
 				if obj[1:].isdigit():
-					return midi_data[int(obj[1:])]
+					return midi_data[int(obj[1:])-1]
 				if obj.startswith("?obs"):
 					return obsws[int(obj[4:])-1]
 				if obj[1:] in VARIABLES:

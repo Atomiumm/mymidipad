@@ -1,7 +1,6 @@
 # mymidipad  
 
-Some python that allows easy config and use of midi pads with multiple functionalities.  
-THIS IS NOT WORKING YET. IT IS STILL IN DEVELOPMENT. WILL HAVE A FIRST WORKING VERSION IN A FEW DAYS
+Some python that allows easy config and use of midi pads with multiple functionalities. 
 
 ---
 ## Dependencies  
@@ -59,7 +58,7 @@ The value corresponding to this key is a dict containing three optional keys:
 
 A possible action is the **set_variable** action, which defines a variable that can be used somewhere else in the config.  
 From then on, instead of setting a value, you can set "?varname", which will be replaced by the value specified. You can change a variable by re-setting it.
-Additionally, you can take a value of the midi data, starting from index 0. For example, "?2" will take the 3rd value of the midi data.  
+Additionally, you can take a value of the midi data, starting from 1. For example, "?3" will take the 3rd value of the midi data.  
 Finally, you can use the midi_timestamp with "?timestamp"  
 
 ---
